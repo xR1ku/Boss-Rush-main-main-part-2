@@ -31,6 +31,7 @@ public class DragonAI : MonoBehaviour
 
             // Update the last position for movement detection
             lastPosition = transform.position;
+           
         }
     }
 }

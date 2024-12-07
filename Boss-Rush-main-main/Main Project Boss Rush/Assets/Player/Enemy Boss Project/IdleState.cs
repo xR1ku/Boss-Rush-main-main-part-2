@@ -21,8 +21,13 @@ namespace EnemyAI
         {
             float distanceToPlayer = Vector3.Distance(transform.position, enemy.player.position);
 
-            // Transition to Move state if player is detected
-            if (distanceToPlayer > enemy.attackRange)
+            // Transition to Attack state if within attack range
+            if (distanceToPlayer <= enemy.attackRange)
+            {
+                enemy.SetState(GetComponent<AttackState>());
+            }
+            // Otherwise, transition to Move state
+            else if (distanceToPlayer > enemy.attackRange)
             {
                 enemy.SetState(GetComponent<MoveState>());
             }

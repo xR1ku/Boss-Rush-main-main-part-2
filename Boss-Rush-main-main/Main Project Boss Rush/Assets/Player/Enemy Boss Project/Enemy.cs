@@ -11,8 +11,6 @@ namespace EnemyAI
 
         // References to state components
         private IdleState idleState;
-        private MoveState moveState;
-        private AttackState attackState;
 
         private MonoBehaviour currentState; // Tracks the active state
 
@@ -20,8 +18,6 @@ namespace EnemyAI
         {
             // Get references to the states
             idleState = GetComponent<IdleState>();
-            moveState = GetComponent<MoveState>();
-            attackState = GetComponent<AttackState>();
 
             // Start in the Idle state
             SetState(idleState);
