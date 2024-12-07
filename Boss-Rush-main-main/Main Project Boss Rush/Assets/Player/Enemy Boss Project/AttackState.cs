@@ -11,6 +11,8 @@ namespace EnemyAI
         Animator enemyAnimator;
         public GameObject Dragon;
 
+        public GameObject BiteAttack;
+
         void Awake()
         {
             enemy = GetComponent<Enemy>();
@@ -58,9 +60,10 @@ namespace EnemyAI
             biteDamage.knockbackForce = 1;
             enemyAnimator.SetBool("BasicAttack", true);
             enemy.SetState(GetComponent<AttackState>());
-            GameObject biteAttack = GetComponent<GameObject>();
-            biteAttack = GameObject.Find("BiteAttack");
-            biteAttack.GetComponent<Damageable>().Hit(biteDamage);
+            //GameObject biteAttack = GetComponent<GameObject>();
+            //biteAttack = GameObject.Find("BiteAttack");
+            //biteAttack.GetComponent<Damageable>().Hit(biteDamage);
+            BiteAttack.SetActive(true);
         }
     }
 }

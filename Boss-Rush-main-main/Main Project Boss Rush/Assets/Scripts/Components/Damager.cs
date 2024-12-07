@@ -13,33 +13,30 @@ public class Damager : MonoBehaviour
     public UnityEvent OnContact;
     public UnityEvent OnSuccessfulHit;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    public void SetDamageAmount(int amount)
-    {
-        damageAmount = amount;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Damager collided with: " + other.name); // Log the collision
+
         OnContact?.Invoke();
 
-        if (other.GetComponent<Damageable>())
+        Damageable damageable = other.GetComponent<Damageable>();
+        if (damageable != null)
         {
+            Debug.Log("Found Damageable on: " + other.name); // Log when Damageable is found
+
             Vector3 dir = other.transform.position - transform.position;
             dir.Normalize();
 
-            Damage damage = new Damage();
-            damage.amount = damageAmount;
-            damage.direction = dir;
-            damage.knockbackForce = knockbackForce;
-
-            if (other.GetComponent<Damageable>().Hit(damage))
+            Damage damage = new Damage
             {
+                amount = damageAmount,
+                direction = dir,
+                knockbackForce = knockbackForce
+            };
+
+            if (damageable.Hit(damage))
+            {
+                Debug.Log("Successful hit! Dealt " + damageAmount + " damage to: " + other.name); // Log successful hit
                 OnSuccessfulHit?.Invoke();
 
                 if (hitEffectPrefab != null)
@@ -47,12 +44,19 @@ public class Damager : MonoBehaviour
                     Instantiate(hitEffectPrefab, other.transform.position, Quaternion.identity);
                 }
 
-                if(hitSounds != null)
+                if (hitSounds != null)
+                {
                     SoundEffectsManager.instance.PlayRandomClip(hitSounds.clips, true);
+                }
+            }
+            else
+            {
+                Debug.Log("Hit was not successful. Enemy might be invincible or already dead."); // Log failed hit
             }
         }
     }
 }
+
 public class Damage
 {
     public int amount = 0;
