@@ -2740,7 +2740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce450a03d4a9d8449abc3b3042b6eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dragon: {fileID: 0}
+  Dragon: {fileID: 1851263341}
   BiteAttack: {fileID: 2135036527}
 --- !u!114 &1851263345
 MonoBehaviour:
